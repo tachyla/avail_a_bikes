@@ -1,33 +1,45 @@
 let baseUrl = "http://api.citybik.es/v2/networks";
 
-//let query = {
-//}
+let query = '';
 
 
-$.getJSON(baseUrl,function(data){
+function getJSON(query){
 	gdata = data;
-	console.log(data);
-})
+	var settings = {
+		href: baseUrl,
+		id: "id",
+		//name: "name",
+		q: query
+		};
 
-
+	$.getJSON(baseUrl, query, function(data){
+		var item = gdata.networks[0].id;
+		var newBase = baseUrl + "/" + gdata.networks[0].id;
+		console.log(data);
+		console.log(item);
+		console.log(newBase);	
+	});
+		
+};
 
 //state modification functions
-	only contain javascript no jquery
+// 	only contain javascript no jquery
 
 
-//render function 
-	where the html elements are added
-	element.append('what i wrote')
+// //render function 
+// 	where the html elements are added
+// 	element.append('what i wrote')
+	// let userInput = $("#");
+	// var result = userInput.val();
 
+// //event listeners
+// $(document).ready(function(eventListner){
+// 	//event listener 
+// 	$('.someSelector').on('click', function() {
+// 	})
 
-//event listeners
-$(document).ready(function(eventListner){
-	//event listener 
-	$('.someSelector').on('click', function() {
-	})
-
-	//event listner
-	$('.someSelector').on('click', function() {
+// 	//event listner
+// 	$('.someSelector').on('click', function() {
 	
-	})
-})
+// 	})
+// })
