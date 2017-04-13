@@ -1,6 +1,6 @@
 let baseUrl = "http://api.citybik.es/v2/networks";
 
-let query = "hello";
+let query = "";
 let appState = {
 				items: []
 				};
@@ -22,9 +22,8 @@ function getJSON(query){
 		var newBase = baseUrl + "/" + gdata.networks[0].id;
 		console.log(data);
 		console.log(item);
-		console.log(newBase);	
+		console.log(newBase);
 	});
-	console.log(query, settings, data);	
 };
 
 //state modification functions
@@ -38,21 +37,10 @@ function getJSON(query){
 	// var result = userInput.val();
 
 // //event listeners
-$("#searchbutton").on("click", function(event){
-	event.preventDefault();
-	query = $("#location_label").val();
+	$("#searchbutton").on("click", function(event){
+		event.preventDefault();
+		query = $("#location_label").val();
 	
-	console.log("query" + query);
+	console.log("query=" + query);
 	let appState = getJSON(query);
-
-})
-// $(document).ready(function(eventListner){
-// 	//event listener 
-// 	$('.someSelector').on('click', function() {
-// 	})
-
-// 	//event listner
-// 	$('.someSelector').on('click', function() {
-	
-// 	})
-// })
+});
