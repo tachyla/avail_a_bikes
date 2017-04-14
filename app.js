@@ -15,7 +15,12 @@ function fetchNetwork(id, callback){
 
 function displayStations(stations){
 	console.log(stations);
-	stations.forEach(station => console.log(station.name + ' ' + station.free_bikes));
+	$(".resultsContainer").empty();
+	stations.forEach(function(station){
+		console.log(station.name + ' ' + station.free_bikes);
+		let resultsHTML = `${station.name} ${station.free_bikes}<br>`;
+		$(".resultsContainer").append(resultsHTML);
+	});
 }
 
 // function calcDistance(lat1, lon1, lat2, lon2){
