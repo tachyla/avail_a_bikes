@@ -1,6 +1,5 @@
 function usFilter(station){
-    return station.location.country === 'US'
-};
+    return station.location.city === "San Francisco Bay Area, CA";
 
 let baseUrl = "http://api.citybik.es/v2/networks";
 
@@ -23,11 +22,11 @@ let appState = {
 
 function getJSON(query){
 	gdata = data;
-	var settings = {
-		href: baseUrl,
-		id: "id",
-		name: query
-		//q: query
+	
+	var query = {
+		href: baseUrl + "/" + id,
+		id: id
+		//location:  
 		};
 
 	$.getJSON(baseUrl, query, function(data){
