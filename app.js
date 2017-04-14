@@ -23,25 +23,7 @@ function displayStations(stations){
 	});
 }
 
-// function calcDistance(lat1, lon1, lat2, lon2){
-// 	var R = 6371e3; // metres
-// 	var φ1 = lat1.toRadians();
-// 	var φ2 = lat2.toRadians();
-// 	var Δφ = (lat2-lat1).toRadians();
-// 	var Δλ = (lon2-lon1).toRadians();
-
-// 	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-// 	        Math.cos(φ1) * Math.cos(φ2) *
-// 	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
-// 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-// 	return R * c;	
-// }
-
-//console.log(calcDistance())
-//state modification functions
-// 	only contain javascript no jquery
-
+//function display
 
 // //render function 
 // 	where the html elements are added
@@ -49,18 +31,38 @@ function displayStations(stations){
 	// let userInput = $("#");
 	// var result = userInput.val()
 
-// //event listeners
 $(function(){
 	$("form").on("submit", function(event){
 		event.preventDefault();
 		const cityName = $("#location_label").val();
-		console.log(cityName);	
+	 	const numFreeBikes = parseInt($("#bikes_needed").val());	
+		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
+
+
+
 
 		fetchAllNetworks(cityName, function(data){
 			const usNetworks = data.networks.filter(network => network.location.country === 'US');
-			const targetNetwork = usNetworks.find(network => network.location.city.toLowerCase() === cityName.toLowerCase())
+			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
+			console.log(cityNetwork);
+			const uri = 'http://api.citybik.es';
+			let cityNetworkUrls = [];
 
-			fetchNetwork(targetNetwork.id, function(data) {
+			// usNetworks.forEach(val => {
+			// 	cityNetworkUrls.push(uri + val.href)
+			// });
+
+			cityNetwork.forEach(val => {
+				cityNetworkUrls.push(uri + val.href)
+			});
+
+
+			// console.log(cityNetwork, cityNetworkUrls);
+			console.log(cityNetworkUrls);
+
+			// const availableBikes = cityNetwork.filter(network => )
+
+			fetchNetwork(cityNetwork.id, function(data) {
 				displayStations(data.network.stations);
 			});
 		});
