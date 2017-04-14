@@ -1,4 +1,5 @@
 const baseUrl = "http://api.citybik.es/v2/networks";
+//const baseUrl = "http://api.citybik.es"
 
 /**
   Fetches networks from CityBike API based on cityName
@@ -46,29 +47,38 @@ $(function(){
 			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
 			console.log(cityNetwork);
 			const uri = 'http://api.citybik.es';
-			let cityNetworkUrls = [];
+			let cityNetworkUrl = uri + cityNetwork[0].href;
 
 			// usNetworks.forEach(val => {
 			// 	cityNetworkUrls.push(uri + val.href)
 			// });
 
-			cityNetwork.forEach(val => {
-				cityNetworkUrls.push(uri + val.href)
-			});
+			// cityNetwork.forEach(val => {
+			// 	cityNetworkUrls.push(uri + val.href)
+			// });
 
 
 			// console.log(cityNetwork, cityNetworkUrls);
-			console.log(cityNetworkUrls);
+			console.log(cityNetworkUrl);
+
+			let availableBikes;
+			function freeBikesFilter(val){
+				return val.free_bikes >= numFreeBikes;
+			};
+
+			$.getJSON(cityNetworkUrl, function(val){
+				availableBikes = val.network.stations.filter(freeBikesFilter);
+				console.log(availableBikes);
+			});
 
 			// const availableBikes = cityNetwork.filter(network => )
 
-			fetchNetwork(cityNetwork.id, function(data) {
-				displayStations(data.network.stations);
-			});
+			// fetchNetwork(cityNetwork.id, function(data) {
+			// 	displayStations(data.network.stations);
+			// });
 		});
 
 		
 	});
 
 });
-// hello world
