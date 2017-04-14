@@ -73,9 +73,9 @@ $(function(){
 
 			// const availableBikes = cityNetwork.filter(network => )
 
-			// fetchNetwork(cityNetwork.id, function(data) {
-			// 	displayStations(data.network.stations);
-			// });
+			fetchNetwork(cityNetwork[0].id, function(data) {
+				displayStations(data.network.stations);
+			});
 		});
 
 		
