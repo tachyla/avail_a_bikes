@@ -1,4 +1,19 @@
+function usFilter(station){
+    return station.location.country === 'US'
+};
+
 let baseUrl = "http://api.citybik.es/v2/networks";
+
+var usLocations = [];
+
+$.getJSON(baseUrl, function(data){
+    console.log(data.networks.filter(usFilter));
+    usLocations = data.networks.filter(usFilter);
+});
+
+usLocations.forEach(function(val){
+    console.log( "http://api.citybik.es" + val.href)
+});
 
 let query = "";
 let appState = {
