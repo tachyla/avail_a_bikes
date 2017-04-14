@@ -1,45 +1,39 @@
-function usFilter(station){
-    return station.location.city === "San Francisco Bay Area, CA";
+const baseUrl = "http://api.citybik.es/v2/networks";
 
-let baseUrl = "http://api.citybik.es/v2/networks";
+/**
+  Fetches networks from CityBike API based on cityName
+  @param {String}   cityName
+  @param {Function} callback - passes data response as first param
+*/
+function fetchAllNetworks(cityName, callback){
+	$.getJSON(baseUrl, callback);
+}
 
-var usLocations = [];
+function fetchNetwork(id, callback){
+	$.getJSON(baseUrl + '/' + id, callback);
+}
 
-$.getJSON(baseUrl, function(data){
-    console.log(data.networks.filter(usFilter));
-    usLocations = data.networks.filter(usFilter);
-});
+function displayStations(stations){
+	console.log(stations);
+	stations.forEach(station => console.log(station.name + ' ' + station.free_bikes));
+}
 
-usLocations.forEach(function(val){
-    console.log( "http://api.citybik.es" + val.href)
-});
+function calcDistance(lat1, lon1, lat2, lon2){
+	var R = 6371e3; // metres
+	var φ1 = lat1.toRadians();
+	var φ2 = lat2.toRadians();
+	var Δφ = (lat2-lat1).toRadians();
+	var Δλ = (lon2-lon1).toRadians();
 
-let query = "";
-let appState = {
-				items: []
-				};
+	var a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+	        Math.cos(φ1) * Math.cos(φ2) *
+	        Math.sin(Δλ/2) * Math.sin(Δλ/2);
+	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
+	return R * c;	
+}
 
-function getJSON(query){
-	gdata = data;
-	
-	var query = {
-		href: baseUrl + "/" + id,
-		id: id
-		//location:  
-		};
-
-	$.getJSON(baseUrl, query, function(data){
-		console.log(data);
-
-		var item = gdata.networks[0].id;
-		var newBase = baseUrl + "/" + gdata.networks[0].id;
-		console.log(data);
-		console.log(item);
-		console.log(newBase);
-	});
-};
-
+console.log(calcDistance())
 //state modification functions
 // 	only contain javascript no jquery
 
@@ -48,13 +42,25 @@ function getJSON(query){
 // 	where the html elements are added
 // 	element.append('what i wrote')
 	// let userInput = $("#");
-	// var result = userInput.val();
+	// var result = userInput.val()
 
 // //event listeners
-	$("#searchbutton").on("click", function(event){
+$(function(){
+	$("form").on("submit", function(event){
 		event.preventDefault();
-		query = $("#location_label").val();
-	
-	console.log("query=" + query);
-	let appState = getJSON(query);
+		const cityName = $("#location_label").val();
+		console.log(cityName);	
+
+		fetchAllNetworks(cityName, function(data){
+			const usNetworks = data.networks.filter(network => network.location.country === 'US');
+			const targetNetwork = usNetworks.find(network => network.location.city.toLowerCase() === cityName.toLowerCase())
+
+			fetchNetwork(targetNetwork.id, function(data) {
+				displayStations(data.network.stations);
+			});
+		});
+
+		
+	});
+
 });
