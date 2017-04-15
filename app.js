@@ -18,9 +18,11 @@ function displayStations(stations){
 	console.log(stations);
 	$(".resultsContainer").empty();
 	stations.forEach(function(station){
+		if(station.free_bikes >= $('#bikes_needed').val()) {
 		console.log(station.name + ' ' + station.free_bikes);
 		let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 		$(".resultsContainer").append(resultsHTML);
+		}
 	});
 }
 
