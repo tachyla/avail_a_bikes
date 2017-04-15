@@ -60,12 +60,17 @@ $(function(){
 			let availableBikes;
 
 			function freeBikesFilter(val){
+				if(val.free_bikes >= numFreeBikes){
+					//console.log(val.free_bikes);
+					return val.free_bikes;
+				}
 				//console.log(val);
-				console.log("test");
-				return val.free_bikes >= numFreeBikes;
+				console.log("freeBikesTest");
+				//return val.free_bikes >= numFreeBikes;
 			};
 
 			$.getJSON(cityNetworkUrl, function(val){
+				//https://api.citybik.es/v2/networks/relay-atlanta
 				availableBikes = val.network.stations.forEach(function(station){
 					//console.log(station.free_bikes);
 					console.log(freeBikesFilter(station));
@@ -73,7 +78,7 @@ $(function(){
 				
 				//THIS didnt touch the correct value for AVAILABLE BIKES
 				//availableBikes = val.network.stations.filter(freeBikesFilter);
-				console.log("This station has: "  + availableBikes +  " available bikes");
+				//console.log("This station has: "  + availableBikes +  " available bikes");
 			});
 
 			// const availableBikes = cityNetwork.filter(network => )
