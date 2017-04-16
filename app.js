@@ -38,7 +38,7 @@ function showInputScreen() {
 						<form>
 							<label class="search">Search</label>
 							<input type="text" id="city_needed" placeholder="San Francisco">
-							<input type="text" id="bikes_needed" name="numberofppl_label" placeholder="5">
+							<input type="text" id="bikes_needed" placeholder="5">
 						
 				 			<button id="searchbutton">Submit</button>
 						</form>
@@ -71,43 +71,62 @@ $(function(){
 		event.preventDefault();
 		showInputScreen();
 	});
-
-	$("form").on("submit", function(event){
+		console.log($("form"));
+		console.log($("form #searchbutton"));
+	
+	// attach to something always on the page, form wasn't already there to fire event listener
+	$(".user_input").on("click", "#searchbutton", function(event){
+		console.log($(this));
+	
 		event.preventDefault();
-		displayStations(stations);
-		// const cityName = $("#city_needed").val();
-	 // 	const numFreeBikes = parseInt($("#bikes_needed").val());	
-		// console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
-
+		// // displayStations(stations);
+		const cityName = $("#city_needed").val();
+	 	const numFreeBikes = parseInt($("#bikes_needed").val());	
+		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
+		debugger;
 		// fetchAllNetworks(cityName, function(data){
-		// 	const usNetworks = data.networks.filter(network => network.location.country === 'US');
-		// 	const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
-		// 	console.log(cityNetwork);
-		// 	//cityNetwork contains only locations in that city
+			const usNetworks = data.networks.filter(network => network.location.country === 'US');
+			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
+			console.log(cityNetwork);
+			//cityNetwork contains only locations in that city
 
-		// 	const uri = 'http://api.citybik.es';
-		// 	let cityNetworkUrl = uri + cityNetwork[0].href;
-		// 	console.log(cityNetworkUrl);
+			const uri = 'http://api.citybik.es';
+			let cityNetworkUrl = uri + cityNetwork[0].href;
+			console.log(cityNetworkUrl);
 
-		// 	let availableBikes;
+			let availableBikes;
 
-		// 	function freeBikesFilter(val){
-		// 		if(val.free_bikes >= numFreeBikes){
-		// 			return val.free_bikes;
-		// 		}
-		// 		console.log("freeBikesTest");
-		// 	};
+			function freeBikesFilter(val){
+				if(val.free_bikes >= numFreeBikes){
+					return val.free_bikes;
+				}
+				console.log("freeBikesTest");
+			};
 
-		// 	$.getJSON(cityNetworkUrl, function(val){
-		// 		availableBikes = val.network.stations.forEach(function(station){
-		// 			//console.log(station.free_bikes);
-		// 			//console.log(freeBikesFilter(station));
-		// 		})
-		// 	});
+			$.getJSON(cityNetworkUrl, function(val){
+				availableBikes = val.network.stations.forEach(function(station){
+					//console.log(station.free_bikes);
+					//console.log(freeBikesFilter(station));
+				})
+			});
 
-		// 	fetchNetwork(cityNetwork[0].id, function(data) {
-		// 		displayStations(data.network.stations);
-		// 	});
+			fetchNetwork(cityNetwork[0].id, function(data) {
+				displayStations(data.network.stations);
+			});
 		// });	
 	});
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
