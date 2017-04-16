@@ -21,9 +21,21 @@ function displayStations(stations){
 	stations.forEach(function(station){
 		if(station.free_bikes >= $('#bikes_needed').val()) {
 		console.log(station.name + ' ' + station.free_bikes);
-		let welcomeScreenHTML = `<div class="logo_container"> 
-		<a href="http://bikewindsoressex.com/wp-content/uploads/2013/05/city-bicycle.jpg"></a></div>`;
-		
+		let userInputScreenHTML = `		<header class="header_container">
+			<h1>Avail-a-Bikes</h1>
+			<h2>Let us get you from A -to- B</h2>
+		</header>
+
+		<div class="main_container">
+			<form>
+				<label class="search">Search</label>
+				<input type="text" id="city_needed" placeholder="San Francisco">
+				<input type="text" id="bikes_needed" name="numberofppl_label" placeholder="5">
+			
+	 			<button id="searchbutton">Submit</button>
+			</form>
+			<section class="resultsContainer">RESULTS CONTAINER BELOW</section>
+		</div>`;
 		let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 		$(".resultsContainer").append(resultsHTML);
 		}
@@ -32,12 +44,6 @@ function displayStations(stations){
 
 
 $(function(){
-//	.on('load') is to render the start screen
-	$(".main_container").on('load', function(event) {
-		event.preventDefault();
-		displayStations(welcomeScreenHTML);
-	})
-
 	$("form").on("submit", function(event){
 		event.preventDefault();
 		const cityName = $("#city_needed").val();

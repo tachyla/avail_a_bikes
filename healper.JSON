@@ -1,0 +1,95 @@
+{
+  "network": {
+    "company": [
+      "CycleHop, LLC",
+      "Social Bicycles Inc"
+    ],
+    "gbfs_href": "https://relaybikeshare.socialbicycles.com/opendata/gbfs.json",
+    "href": "/v2/networks/relay-atlanta",
+    "id": "relay-atlanta",
+    "location": {
+      "city": "Atlanta, GA",
+      "country": "US",
+      "latitude": 33.7627941119619,
+      "longitude": -84.38727110624313
+    },
+    "name": "Relay Bike Share",
+    "stations": [
+      {"empty_slots": 4, "extra": {
+                                    "address": "78-122 Broad Street Southwest, Atlanta",
+                                    "last_updated": 1492233933,
+                                    "renting": 1,
+                                    "returning": 1,
+                                    "uid": "hub_1477"
+                                  },
+        "free_bikes": 3,
+        "id": "98e128eee23fff1b71a783cf9d6f94fc",
+        "latitude": 33.75160347465388,
+        "longitude": -84.39338453114033,
+        "name": "BROAD & MITCHELL",
+        "timestamp": "2017-04-15T05:25:38.547000Z"
+      },
+      {
+        "empty_slots": 7,
+        "extra": {
+          "address": "2-4 Ponce De Leon Avenue Northeast, Atlanta",
+          "last_updated": 1492233933,
+          "renting": 1,
+          "returning": 1,
+          "uid": "hub_2118"
+        },
+        "free_bikes": 3,
+        "id": "6e7d4f909e75709f8190076c1928fa8f",
+        "latitude": 33.77233507697942,
+        "longitude": -84.38723489642143,
+        "name": "NORTH AVE MARTA",
+        "timestamp": "2017-04-15T05:25:38.557000Z"
+      },
+      {
+        "empty_slots": 10,
+        "extra": {
+          "address": "768-798 Beckwith Street Southwest, Atlanta",
+          "last_updated": 1492233933,
+          "renting": 1,
+          "returning": 1,
+          "uid": "hub_2462"
+        },
+        "free_bikes": 0,
+        "id": "a0291968ba98143123e89e6e6f5b2e13",
+        "latitude": 33.7519670553166,
+        "longitude": -84.4133448600769,
+        "name": "AUC WOODRUFF LIBRARY",
+        "timestamp": "2017-04-15T05:25:38.575000Z"
+      },
+      {
+        "empty_slots": 9,
+        "extra": {
+          "address": "906-908 Ralph David Abernathy Boulevard, Atlanta",
+          "last_updated": 1492233933,
+          "renting": 1,
+          "returning": 1,
+          "uid": "hub_2468"
+        },
+        "free_bikes": 1,
+        "id": "728a4670f3944fdbe3494b06b2ba5e93",
+        "latitude": 33.73797746075206,
+        "longitude": -84.41755458712578,
+        "name": "WEST END STATION",
+        "timestamp": "2017-04-15T05:25:38.592000Z"
+      },
+      {
+        "empty_slots": 9,
+        "extra": {
+          "address": "373-407 Westview Drive Southwest, Atlanta",
+          "last_updated": 1492233933,
+          "renting": 1,
+          "returning": 1,
+          "uid": "hub_2178"
+        },
+        "free_bikes": 1,
+        "id": "59cd04c35e0e0bac279bbe35f8ae1d7a",
+        "latitude": 33.74427215464,
+        "longitude": -84.41357016563416,
+        "name": "SPELMAN COLLEGE AT WESTVIEW",
+        "timestamp": "2017-04-15T05:25:38.574000Z"
+      }

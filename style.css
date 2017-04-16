@@ -1,0 +1,32 @@
+.main_container {
+	max-width: 500px;
+	margin: 0 auto;
+}
+.logo {
+	display: block;
+	margin: 0 auto;
+	width: 1000px;
+	margin-top: 50px;
+	border: 10px solid green;
+	border-radius: 5px;
+
+}
+
+h1, h2{
+	margin-top: 50px;
+	font-family: helvetica;
+	color: green;
+	text-align: center;
+
+
+/*button[type='submit'] {
+	color: green;
+	display: block;
+	margin: 0 auto;
+}*/
+
+button[type='submit'] {
+	display: block;
+	width: 50%;
+	margin-left: 100px;
+}
