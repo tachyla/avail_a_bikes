@@ -58,11 +58,13 @@ function displayStations(stations){
 	stations.forEach(function(station){
 		if(station.free_bikes >= bikesNeeded) {
 			console.log(station.name + ' ' + station.free_bikes);
-		 	resultsHTML += `${station.name.substring(0, 25)} has ${station.free_bikes} bikes<br>`;
+		 	resultsHTML += `
+		 	<ul>
+				<li>${station.name.substring(0, 25)} has ${station.free_bikes} bikes<br>
+				${station.extra.address}</li>
+ 			</ul>`;
 		}
-
 	});
-	// console.log(resultsHTML);
 	$(".resultsContainer").append(resultsHTML);
 }
 
