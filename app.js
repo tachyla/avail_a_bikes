@@ -27,10 +27,8 @@ function showStartScreen() {
 	$(".outer_container").append(startScreenHTML);
 }
 
-function displayStations(stations, choice){
-	console.log(stations);
-	$(".resultsContainer").empty();
-
+function showInputScreen() {
+	$(".outer_container").empty();
 	let userInputScreenHTML = `
 					<header class="header_container">
 						<h1>Avail-a-Bikes</h1>
@@ -46,59 +44,70 @@ function displayStations(stations, choice){
 						</form>
 						<section class="resultsContainer">RESULTS CONTAINER BELOW</section>
 					</div>`;
+	$(".user_input").append(userInputScreenHTML);				
+}
 
+function displayStations(stations){
+	console.log(stations);
+	$(".resultsContainer").empty();
+	let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
+	
 	stations.forEach(function(station){
 		if(station.free_bikes >= $('#bikes_needed').val()) {
 			console.log(station.name + ' ' + station.free_bikes);
-		 	$(".resultsContainer").append(resultsHTML);
+		 	// $(".resultsContainer").append(resultsHTML);
 		}
-		let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 	});
+
+	$(".resultsContainer").append(resultsHTML);
 }
 
 showStartScreen();
 
 $(function(){
-	// displayStations(station, "startScreen");
-	// $(".outer_container").on("click", ".start_button", function(event) {
-	// 	displayStations(station, "startScreen");
-	// })
+	
+
+	$(".outer_container").on("click", ".start_button", function(event) {
+		event.preventDefault();
+		showInputScreen();
+	});
 
 	$("form").on("submit", function(event){
 		event.preventDefault();
-		const cityName = $("#city_needed").val();
-	 	const numFreeBikes = parseInt($("#bikes_needed").val());	
-		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
+		displayStations(stations);
+		// const cityName = $("#city_needed").val();
+	 // 	const numFreeBikes = parseInt($("#bikes_needed").val());	
+		// console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
 
-		fetchAllNetworks(cityName, function(data){
-			const usNetworks = data.networks.filter(network => network.location.country === 'US');
-			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
-			console.log(cityNetwork);
-			//cityNetwork contains only locations in that city
+		// fetchAllNetworks(cityName, function(data){
+		// 	const usNetworks = data.networks.filter(network => network.location.country === 'US');
+		// 	const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
+		// 	console.log(cityNetwork);
+		// 	//cityNetwork contains only locations in that city
 
-			const uri = 'http://api.citybik.es';
-			let cityNetworkUrl = uri + cityNetwork[0].href;
-			console.log(cityNetworkUrl);
+		// 	const uri = 'http://api.citybik.es';
+		// 	let cityNetworkUrl = uri + cityNetwork[0].href;
+		// 	console.log(cityNetworkUrl);
 
-			let availableBikes;
+		// 	let availableBikes;
 
-			function freeBikesFilter(val){
-				if(val.free_bikes >= numFreeBikes){
-					return val.free_bikes;
-				}
-				console.log("freeBikesTest");
-			};
+		// 	function freeBikesFilter(val){
+		// 		if(val.free_bikes >= numFreeBikes){
+		// 			return val.free_bikes;
+		// 		}
+		// 		console.log("freeBikesTest");
+		// 	};
 
-			$.getJSON(cityNetworkUrl, function(val){
-				availableBikes = val.network.stations.forEach(function(station){
-					//console.log(station.free_bikes);
-					//console.log(freeBikesFilter(station));
-				})
-			});
+		// 	$.getJSON(cityNetworkUrl, function(val){
+		// 		availableBikes = val.network.stations.forEach(function(station){
+		// 			//console.log(station.free_bikes);
+		// 			//console.log(freeBikesFilter(station));
+		// 		})
+		// 	});
 
-			fetchNetwork(cityNetwork[0].id, function(data) {
-				displayStations(data.network.stations);
-			});
-		});	
+		// 	fetchNetwork(cityNetwork[0].id, function(data) {
+		// 		displayStations(data.network.stations);
+		// 	});
+		// });	
 	});
 });
