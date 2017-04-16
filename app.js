@@ -1,4 +1,6 @@
+//put inside object literal
 const baseUrl = "http://api.citybik.es/v2/networks";
+
 //const baseUrl = "http://api.citybik.es"
 
 /**
@@ -13,15 +15,6 @@ function fetchAllNetworks(cityName, callback){
 function fetchNetwork(id, callback){
 	$.getJSON(baseUrl + '/' + id, callback);
 }
-
-function fetchFreeBikes(cityNetworkUrl, callback){
-	$.getJSON(cityNetworkUrl, function(val){
-		availableBikes = val.network.stations.forEach(function(station){
-		//console.log(station.free_bikes);
-		//console.log(freeBikesFilter(station));
-		})
-	})
-};
 
 function showStartScreen() {
 	let startScreenHTML = `
@@ -46,8 +39,8 @@ function showInputScreen() {
 					<div class="main_container">
 						<form>
 							<label class="search">Search</label>
-							<input type="text" id="city_needed" placeholder="San Francisco">
-							<input type="text" id="bikes_needed" placeholder="5">
+							<input type="text" id="city_needed" placeholder="San Francisco" required>
+							<input type="number" id="bikes_needed" placeholder="5" required>
 						
 				 			<button id="searchbutton">Submit</button>
 						</form>
@@ -60,18 +53,20 @@ function displayStations(stations){
 	console.log(stations);
 	$(".resultsContainer").empty();
 	let resultsHTML = '';
-	
-	stations.forEach(function(station){
-		if(station.free_bikes >= $('#bikes_needed').val()) {
-			console.log(station.name + ' ' + station.free_bikes);
-		 	resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
-		}
-		
-	});
+	let bikesNeeded = $('#bikes_needed').val();
 
+	stations.forEach(function(station){
+		if(station.free_bikes >= bikesNeeded) {
+			console.log(station.name + ' ' + station.free_bikes);
+		 	resultsHTML += `${station.name} has ${station.free_bikes} bikes<br>`;
+		}
+
+	});
+	// console.log(resultsHTML);
 	$(".resultsContainer").append(resultsHTML);
 }
 
+// first thing that needs to be called
 showStartScreen();
 
 $(function(){
@@ -81,51 +76,41 @@ $(function(){
 		event.preventDefault();
 		showInputScreen();
 	});
-		// console.log($("form"));
-		// console.log($("form #searchbutton"));
 	
 	// attach to something always on the page, form wasn't already there to fire event listener
 	$(".user_input").on("click", "#searchbutton", function(event){
-		// console.log($(this));
-	
 		event.preventDefault();
 		// // displayStations(stations);
 		const cityName = $("#city_needed").val();
 	 	const numFreeBikes = parseInt($("#bikes_needed").val());	
 		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
 		// debugger;
+		// put JSON request in directly
 		fetchAllNetworks(cityName, function(data){
 			const usNetworks = data.networks.filter(network => network.location.country === 'US');
 			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
-			console.log(cityNetwork);
+
+			console.log("cityNetwork", cityNetwork);
 			//cityNetwork contains only locations in that city
+			if (cityNetwork.length > 0) {
+				const uri = 'http://api.citybik.es';
+				let cityNetworkUrl = uri + cityNetwork[0].href;
+				console.log(cityNetworkUrl);
 
-			const uri = 'http://api.citybik.es';
-			let cityNetworkUrl = uri + cityNetwork[0].href;
-			console.log(cityNetworkUrl);
-
-			let availableBikes;
-
-			function freeBikesFilter(val){
-				if(val.free_bikes >= numFreeBikes){
-					return val.free_bikes;
-				}
-				console.log("freeBikesTest");
-			};
-
-
-			fetchNetwork(cityNetwork[0].id, function(data) {
-				displayStations(data.network.stations);
-			});
-
-			fetchFreeBikes();
+				fetchNetwork(cityNetwork[0].id, function(data) {
+					displayStations(data.network.stations);
+				});
+			}
+			else {
+				$(".resultsContainer").empty();
+				$(".resultsContainer").append(`<span>no results found</span>`);
+			}
 		});	
 	});
 });
 
 
-
-
+// function we declared on line 95 should be assigned to actual function instead of anonymous and then put JSON request directly in event listener
 
 
 
