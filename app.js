@@ -14,6 +14,15 @@ function fetchNetwork(id, callback){
 	$.getJSON(baseUrl + '/' + id, callback);
 }
 
+function fetchFreeBikes(cityNetworkUrl, callback){
+	$.getJSON(cityNetworkUrl, function(val){
+		availableBikes = val.network.stations.forEach(function(station){
+		//console.log(station.free_bikes);
+		//console.log(freeBikesFilter(station));
+		})
+	})
+};
+
 function showStartScreen() {
 	let startScreenHTML = `
 			<header class="header_container">
@@ -50,13 +59,14 @@ function showInputScreen() {
 function displayStations(stations){
 	console.log(stations);
 	$(".resultsContainer").empty();
-	let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
+	let resultsHTML = '';
 	
 	stations.forEach(function(station){
 		if(station.free_bikes >= $('#bikes_needed').val()) {
 			console.log(station.name + ' ' + station.free_bikes);
-		 	// $(".resultsContainer").append(resultsHTML);
+		 	resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 		}
+		
 	});
 
 	$(".resultsContainer").append(resultsHTML);
@@ -71,20 +81,20 @@ $(function(){
 		event.preventDefault();
 		showInputScreen();
 	});
-		console.log($("form"));
-		console.log($("form #searchbutton"));
+		// console.log($("form"));
+		// console.log($("form #searchbutton"));
 	
 	// attach to something always on the page, form wasn't already there to fire event listener
 	$(".user_input").on("click", "#searchbutton", function(event){
-		console.log($(this));
+		// console.log($(this));
 	
 		event.preventDefault();
 		// // displayStations(stations);
 		const cityName = $("#city_needed").val();
 	 	const numFreeBikes = parseInt($("#bikes_needed").val());	
 		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
-		debugger;
-		// fetchAllNetworks(cityName, function(data){
+		// debugger;
+		fetchAllNetworks(cityName, function(data){
 			const usNetworks = data.networks.filter(network => network.location.country === 'US');
 			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
 			console.log(cityNetwork);
@@ -103,22 +113,15 @@ $(function(){
 				console.log("freeBikesTest");
 			};
 
-			$.getJSON(cityNetworkUrl, function(val){
-				availableBikes = val.network.stations.forEach(function(station){
-					//console.log(station.free_bikes);
-					//console.log(freeBikesFilter(station));
-				})
-			});
 
 			fetchNetwork(cityNetwork[0].id, function(data) {
 				displayStations(data.network.stations);
 			});
-		// });	
+
+			fetchFreeBikes();
+		});	
 	});
 });
-
-
-
 
 
 
