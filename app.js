@@ -34,17 +34,17 @@ function showInputScreen() {
 	let userInputScreenHTML = `
 					<header class="header_container">
 						<h1>Avail-a-Bikes</h1>
-						<h2>Let us get you from A -to- B</h2>
 					</header>
 					<div class="main_container">
 						<form>
-							<label class="search">Search</label>
-							<input type="text" id="city_needed" placeholder="San Francisco" required>
-							<input type="number" id="bikes_needed" placeholder="5" required>
+							<label class="search">Search City, State</label>
+							<input type="text" id="city_needed" placeholder="Atlanta, GA" required><br>
+							<label class="numBikes"># Bikes Needed</label>
+							<input type="number" id="bikes_needed" placeholder="5" required><br>
 						
 				 			<button id="searchbutton">Submit</button>
 						</form>
-						<section class="resultsContainer">RESULTS CONTAINER BELOW</section>
+						<section class="resultsContainer"></section>
 					</div>`;
 	$(".user_input").append(userInputScreenHTML);				
 }

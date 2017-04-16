@@ -1,6 +1,26 @@
 .outer_container {
 	max-width: 500px;
 	margin: 0 auto;
+	text-align: center;
+}
+
+.user_input{
+	margin: 0 auto;
+	max-width: 500px;
+	text-align: center;
+}
+.user_input h1{
+	margin-top: 50px;
+	font-family: helvetica;
+	color: green;
+}
+.numBikes {
+	margin-left: 13px;
+}
+
+#searchbutton {
+	margin-top:10px;
+	margin-bottom:50px;
 }
 .logo {
 	display: block;
@@ -11,9 +31,13 @@
 	border-radius: 5px;
 
 }
+.resultsContainer {
+	text-align: left;
+	margin-left: 50px;
+}
 
-h1, h2{
-	margin-top: 50px;
+.outer_container h1, h2{
+	margin-top: 30px;
 	font-family: helvetica;
 	color: green;
 	text-align: center;
