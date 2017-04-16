@@ -1,19 +1,37 @@
 //put inside object literal
-const baseUrl = "http://api.citybik.es/v2/networks";
+const appState = {baseUrl: "http://api.citybik.es/v2/networks"};
 
-//const baseUrl = "http://api.citybik.es"
 
 /**
   Fetches networks from CityBike API based on cityName
   @param {String}   cityName
   @param {Function} callback - passes data response as first param
 */
-function fetchAllNetworks(cityName, callback){
-	$.getJSON(baseUrl, callback);
+function fetchAllNetworks(cityName, data) {
+	$.getJSON(appState.baseUrl, function(data){
+		const usNetworks = data.networks.filter(network => network.location.country === 'US');
+		const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
+
+		console.log("cityNetwork", cityNetwork);
+			//cityNetwork contains only locations in that city
+		if (cityNetwork.length > 0) {
+			const uri = 'http://api.citybik.es';
+			let cityNetworkUrl = uri + cityNetwork[0].href;
+			console.log(cityNetworkUrl);
+
+			fetchNetwork(cityNetwork[0].id, function(data) {
+				displayStations(data.network.stations);
+			});
+		}
+		else {
+			$(".resultsContainer").empty();
+			$(".resultsContainer").append(`<span>no results found</span>`);
+		}
+	});
 }
 
 function fetchNetwork(id, callback){
-	$.getJSON(baseUrl + '/' + id, callback);
+	$.getJSON(appState.baseUrl + '/' + id, callback);
 }
 
 function showStartScreen() {
@@ -88,26 +106,8 @@ $(function(){
 		console.log('CITY:',cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
 		// debugger;
 		// put JSON request in directly
-		fetchAllNetworks(cityName, function(data){
-			const usNetworks = data.networks.filter(network => network.location.country === 'US');
-			const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
 
-			console.log("cityNetwork", cityNetwork);
-			//cityNetwork contains only locations in that city
-			if (cityNetwork.length > 0) {
-				const uri = 'http://api.citybik.es';
-				let cityNetworkUrl = uri + cityNetwork[0].href;
-				console.log(cityNetworkUrl);
-
-				fetchNetwork(cityNetwork[0].id, function(data) {
-					displayStations(data.network.stations);
-				});
-			}
-			else {
-				$(".resultsContainer").empty();
-				$(".resultsContainer").append(`<span>no results found</span>`);
-			}
-		});	
+		fetchAllNetworks(cityName, appState);		
 	});
 });
 
