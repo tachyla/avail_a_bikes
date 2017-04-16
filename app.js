@@ -21,27 +21,35 @@ function displayStations(stations){
 	stations.forEach(function(station){
 		if(station.free_bikes >= $('#bikes_needed').val()) {
 		console.log(station.name + ' ' + station.free_bikes);
-		let userInputScreenHTML = `		<header class="header_container">
-			<h1>Avail-a-Bikes</h1>
-			<h2>Let us get you from A -to- B</h2>
-		</header>
-
-		<div class="main_container">
-			<form>
-				<label class="search">Search</label>
-				<input type="text" id="city_needed" placeholder="San Francisco">
-				<input type="text" id="bikes_needed" name="numberofppl_label" placeholder="5">
-			
-	 			<button id="searchbutton">Submit</button>
-			</form>
-			<section class="resultsContainer">RESULTS CONTAINER BELOW</section>
-		</div>`;
 		let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 		$(".resultsContainer").append(resultsHTML);
+		let startScreenHTML = `
+					<header class="header_container">
+							<h1>Avail-a-Bikes</h1>
+							<h2>Let us get you from A -to- B</h2>
+					</header>
+					<div class="logo_container">
+						<img class="logo" src="avail-a-bikes.jpg" />
+					</div>
+					<button type="submit" class="start_button">Find Bikes</button>`;
+		let userInputScreenHTML = `
+						<header class="header_container">
+							<h1>Avail-a-Bikes</h1>
+							<h2>Let us get you from A -to- B</h2>
+						</header>
+						<div class="main_container">
+							<form>
+								<label class="search">Search</label>
+								<input type="text" id="city_needed" placeholder="San Francisco">
+								<input type="text" id="bikes_needed" name="numberofppl_label" placeholder="5">
+							
+					 			<button id="searchbutton">Submit</button>
+							</form>
+							<section class="resultsContainer">RESULTS CONTAINER BELOW</section>
+						</div>`;
 		}
 	});
 }
-
 
 $(function(){
 	$("form").on("submit", function(event){

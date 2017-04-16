@@ -1,4 +1,4 @@
-.main_container {
+.outer_container {
 	max-width: 500px;
 	margin: 0 auto;
 }
@@ -28,5 +28,5 @@ h1, h2{
 button[type='submit'] {
 	display: block;
 	width: 50%;
-	margin-left: 100px;
+	margin: 0 auto;
 }
