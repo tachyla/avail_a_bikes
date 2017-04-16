@@ -17,22 +17,27 @@ function fetchNetwork(id, callback){
 function displayStations(stations){
 	console.log(stations);
 	$(".resultsContainer").empty();
+
 	stations.forEach(function(station){
 		if(station.free_bikes >= $('#bikes_needed').val()) {
 		console.log(station.name + ' ' + station.free_bikes);
+		let welcomeScreenHTML = `<div class="logo_container"> 
+		<a href="http://bikewindsoressex.com/wp-content/uploads/2013/05/city-bicycle.jpg"></a></div>`;
+		
 		let resultsHTML = `${station.name} has ${station.free_bikes} bikes<br>`;
 		$(".resultsContainer").append(resultsHTML);
 		}
 	});
 }
 
-// //render function 
-// 	where the html elements are added
-// 	element.append('what i wrote')
-	// let userInput = $("#");
-	// var result = userInput.val()
 
 $(function(){
+//	.on('load') is to render the start screen
+	$(".main_container").on('load', function(event) {
+		event.preventDefault();
+		displayStations(welcomeScreenHTML);
+	})
+
 	$("form").on("submit", function(event){
 		event.preventDefault();
 		const cityName = $("#city_needed").val();
@@ -75,7 +80,7 @@ $(function(){
 				//https://api.citybik.es/v2/networks/relay-atlanta
 				availableBikes = val.network.stations.forEach(function(station){
 					//console.log(station.free_bikes);
-					console.log(freeBikesFilter(station));
+					//console.log(freeBikesFilter(station));
 				})
 				
 				//THIS didnt touch the correct value for AVAILABLE BIKES
