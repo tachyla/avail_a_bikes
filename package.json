@@ -1,0 +1,24 @@
+{
+  "name": "avail_a_bikes",
+  "version": "1.0.0",
+  "description": "A tool for finding nearby bikes stations.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tachyla/avail_a_bikes.git"
+  },
+  "author": "TaChyla & Thien",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tachyla/avail_a_bikes/issues"
+  },
+  "homepage": "https://github.com/tachyla/avail_a_bikes#readme",
+  "dependencies": {
+    "nodemon": "^1.11.0",
+    "path": "^0.12.7"
+  }
+}
