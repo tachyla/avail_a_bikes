@@ -1,8 +1,8 @@
 //put inside object literal
-const appState = { baseUrl: 'http://api.citybik.es/v2/networks' };
+const appState = { baseUrl: 'https://api.citybik.es/v2/networks' };
 
 
-/**
+/*
   Fetches networks from CityBike API based on cityName
   @param {String}   cityName
   @param {Function} callback - passes data response as first param
@@ -15,7 +15,7 @@ function fetchAllNetworks(cityName, data) {
     console.log('cityNetwork', cityNetwork);
     //cityNetwork contains only locations in that city
     if (cityNetwork.length > 0) {
-      const uri = 'http://api.citybik.es';
+      const uri = 'https://api.citybik.es';
       let cityNetworkUrl = uri + cityNetwork[0].href;
       console.log(cityNetworkUrl);
 
