@@ -58,13 +58,13 @@ function showInputScreen() {
 							<label class="search">Search City, State</label>
 							<input type="text" id="city_needed" placeholder="Atlanta, GA" required><br>
 							<label class="numBikes"># Bikes Needed</label>
-							<input type="number" id="bikes_needed" placeholder="5" required><br>
-						
+							<input type="number" min="0" id="bikes_needed" placeholder="5" required><br>
 				 			<button id="searchbutton">Submit</button>
 						</form>
 						<section class="resultsContainer"></section>
 					</div>`;
   $('.user_input').append(userInputScreenHTML);
+  
 }
 
 function displayStations(stations) {
@@ -86,7 +86,7 @@ function displayStations(stations) {
   $('.resultsContainer').append(resultsHTML);
 }
 
-// first thing that needs to be called
+// first func that gets called
 showStartScreen();
 
 $(function () {
@@ -101,18 +101,16 @@ $(function () {
   $('.user_input').on('click', '#searchbutton', function (event) {
     event.preventDefault();
     // // displayStations(stations);
-    const cityName = $('#city_needed').val();
-    const numFreeBikes = parseInt($('#bikes_needed').val());
-    console.log('CITY:', cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
-    // debugger;
+      const cityName = $('#city_needed').val();
+      const numFreeBikes = parseInt($('#bikes_needed').val());
+      console.log('CITY:', cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
     // put JSON request in directly
 
-    fetchAllNetworks(cityName, appState);
+      fetchAllNetworks(cityName, appState);
   });
 });
 
 
-// function we declared on line 95 should be assigned to actual function instead of anonymous and then put JSON request directly in event listener
 
 
 
