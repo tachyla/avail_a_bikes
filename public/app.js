@@ -35,6 +35,7 @@ function fetchNetwork(id, callback) {
 }
 
 function showStartScreen() {
+  $('.hidden_search').hide();
   let startScreenHTML = `
 			<header class="header_container">
 					<h1>Avail-a-Bikes</h1>
@@ -49,14 +50,12 @@ function showStartScreen() {
 
 function showInputScreen() {
   $('.outer_container').empty();
+  $('.hidden_search').show();
   let userInputScreenHTML = `
-					<header class="header_container">
-						<h1>Avail-a-Bikes</h1>
-					</header>
 					<div class="main_container">
 						<form>
-							<label class="search">Search City, State</label>
-							<input type="text" id="city_needed" placeholder="Atlanta, GA" required><br>
+              
+
 							<label class="numBikes"># Bikes Needed</label>
 							<input type="number" min="0" id="bikes_needed" placeholder="5" required><br>
 				 			<button id="searchbutton">Submit</button>
@@ -66,6 +65,13 @@ function showInputScreen() {
   $('.user_input').append(userInputScreenHTML);
   
 }
+
+// displayGoogleSearch(event) {
+// const searchInput = event.target;
+// $('.search_term').hide();
+// }
+
+
 
 function displayStations(stations) {
   console.log(stations);
