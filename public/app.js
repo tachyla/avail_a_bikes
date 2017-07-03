@@ -42,7 +42,7 @@ function showStartScreen() {
 					<h2>Let us get you from A -to- B</h2>
 			</header>
 			<div class="logo_container">
-				<img class="logo" src="/avail-a-bikes.jpg" />
+        <img class="logo" src="/avai-a-bike.gif" />
 			</div>
 			<button type="submit" class="start_button">Find Bikes</button>`;
   $('.outer_container').append(startScreenHTML);
@@ -103,11 +103,20 @@ $(function () {
     showInputScreen();
   });
 
-  // attach to something always on the page, form wasn't already there to fire event listener
   $('.user_input').on('click', '#searchbutton', function (event) {
     event.preventDefault();
-    // // displayStations(stations);
-      const cityName = $('#city_needed').val();
+//capture the google autoComplete input from the user
+      const googleResponse = $('#city_needed').val();
+
+
+    function findUSindex(str){
+      let usIndex = str.lastIndexOf(', Uni');
+      return str.slice(0, usIndex); 
+    }
+    
+    let cityName = findUSindex(googleResponse);
+    console.log(cityName);
+
       const numFreeBikes = parseInt($('#bikes_needed').val());
       console.log('CITY:', cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
     // put JSON request in directly
