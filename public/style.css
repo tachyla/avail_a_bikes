@@ -23,6 +23,11 @@
 	margin-top: 75px;
 }
 
+#city_needed,
+#bikes_needed {
+	width: 250px;
+	/* border: #FE287A; */
+ }
 .user_input{
 	margin: 0 auto;
 	max-width: 80%;
