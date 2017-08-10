@@ -73,7 +73,7 @@ function displayStations(stations) {
   let stationCounter = 0;
 
   // stations.forEach(function (station) {
-  stations.slice(0, 20).forEach(function (station) {
+  stations.slice(0, 10).forEach(function (station) {
       
     if (station.free_bikes >= bikesNeeded) {
       console.log(station.name + ' ' + station.free_bikes);
