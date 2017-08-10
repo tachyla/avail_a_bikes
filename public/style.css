@@ -1,3 +1,7 @@
+* {
+	font-family: 'Josefin Slab', serif;	
+}
+
 .outer_container {
 	width: 100%
 	margin: 0 auto;
@@ -16,14 +20,20 @@
 	max-width: 500px;
 	margin: 0 auto;
 	text-align: center;
+	margin-top: 75px;
 }
 
 .user_input{
 	margin: 0 auto;
 	max-width: 80%;
 	text-align: center;
+	font-size: 22px;
+	
 }
 
+.search {
+	font-size: 22px;
+}
 
 .numBikes {
 	margin-left: 13px;
@@ -32,6 +42,10 @@
 #searchbutton {
 	margin-top:10px;
 	margin-bottom:50px;
+	background-color: #FE287A;
+	border: none;	
+	color: darkslateblue;	
+	font-size: 22px
 }
 
 .start_button {
@@ -39,6 +53,8 @@
 	border: none;
 	height: 30px;
 	background-color: #FE287A;
+	font-size: 22px;
+	color: darkslateblue;
 }
 
 .resultsContainer {
@@ -56,7 +72,6 @@ ul li::before {
 
 .outer_container h1, h2{
 	margin-top: 30px;
-	font-family: 'Josefin Slab', serif;
 	font-weight: bold;
 	color: #A74C9F;
 	text-align: center;
