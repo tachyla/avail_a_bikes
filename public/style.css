@@ -1,5 +1,5 @@
 .outer_container {
-	max-width: 500px;
+	max-width: 75%;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -12,15 +12,9 @@
 
 .user_input{
 	margin: 0 auto;
-	max-width: 500px;
+	max-width: 80%;
 	text-align: center;
 }
-
-/*.user_input h1{
-	margin-top: 50px;
-	font-family: helvetica;
-	color: green;
-}*/
 
 .numBikes {
 	margin-left: 13px;
@@ -40,7 +34,7 @@
 .logo {
 	display: block;
 	margin: 0 auto;
-	width: 70%;
+	width: 100%;
 	margin-top: 50px;
 	border: 10px solid #FE287A;
 	border-radius: 5px;
