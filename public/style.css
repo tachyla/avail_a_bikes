@@ -29,10 +29,6 @@
 	text-align: center;
 }
 
-.search {
-	font-size: 22px;
-}
-
 .numBikes {
 	margin-left: 13px;
 }
@@ -92,6 +88,9 @@ button[type='submit'] {
 		width: 85%;
 	}
 
+	.search {
+		font-size: 26px;
+	}
 	.user_input{
 		font-size: 26px;
 	}
@@ -102,6 +101,10 @@ button[type='submit'] {
 	
 	.logo {
 		width: 65%;
+	}
+
+	.search {
+		font-size: 22px;
 	}
 
 	.user_input{
@@ -115,6 +118,11 @@ button[type='submit'] {
 	.logo {
 		width: 50%;
 	}
+	
+	.search {
+		font-size: 22px;
+	}
+		
 	.user_input{
 		font-size: 22px;
 	}
