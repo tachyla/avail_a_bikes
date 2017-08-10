@@ -1,4 +1,3 @@
-//put inside object literal
 const appState = { baseUrl: 'https://api.citybik.es/v2/networks' };
 
 
@@ -66,33 +65,30 @@ function showInputScreen() {
   
 }
 
-// displayGoogleSearch(event) {
-// const searchInput = event.target;
-// $('.search_term').hide();
-// }
-
-
-
 function displayStations(stations) {
   console.log(stations);
   $('.resultsContainer').empty();
   let resultsHTML = '';
   let bikesNeeded = $('#bikes_needed').val();
+  let stationCounter = 0;
 
-  stations.forEach(function (station) {
+  // stations.forEach(function (station) {
+  stations.slice(0, 20).forEach(function (station) {
+      
     if (station.free_bikes >= bikesNeeded) {
       console.log(station.name + ' ' + station.free_bikes);
-      resultsHTML += `
-                        <ul>
-                            <li>${station.name.substring(0, 25)} has ${station.free_bikes} bikes<br>
-                            \t ${station.extra.address}</li>
-                        </ul>`;
-    }
-  });
+
+        resultsHTML += `
+                          <ul>
+                              <li>${station.name.substring(0, 25)} has ${station.free_bikes} bikes<br>
+                              \t ${station.extra.address}</li>
+                          </ul>`;
+      }
+    });
+
   $('.resultsContainer').append(resultsHTML);
 }
 
-// first func that gets called
 showStartScreen();
 
 $(function () {
@@ -105,7 +101,7 @@ $(function () {
 
   $('.user_input').on('click', '#searchbutton', function (event) {
     event.preventDefault();
-//capture the google autoComplete input from the user
+//captures google autoComplete input from the user
       const googleResponse = $('#city_needed').val();
 
 
@@ -119,7 +115,6 @@ $(function () {
 
       const numFreeBikes = parseInt($('#bikes_needed').val());
       console.log('CITY:', cityName, numFreeBikes, 'and type is', typeof numFreeBikes);
-    // put JSON request in directly
 
       fetchAllNetworks(cityName, appState);
   });
