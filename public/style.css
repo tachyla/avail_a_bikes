@@ -1,7 +1,15 @@
 .outer_container {
-	max-width: 50%;
+	width: 100%
 	margin: 0 auto;
 	text-align: center;
+}
+
+.logo {
+	display: block;
+	margin: 0 auto;
+	margin-top: 50px;
+	border: 10px solid #FE287A;
+	border-radius: 5px;
 }
 
 .hidden_search{ 
@@ -16,6 +24,7 @@
 	text-align: center;
 }
 
+
 .numBikes {
 	margin-left: 13px;
 }
@@ -24,20 +33,12 @@
 	margin-top:10px;
 	margin-bottom:50px;
 }
+
 .start_button {
 	margin-top: 10px;
 	border: none;
 	height: 30px;
 	background-color: #FE287A;
-}
-
-.logo {
-	display: block;
-	margin: 0 auto;
-	width: 100%;
-	margin-top: 50px;
-	border: 10px solid #FE287A;
-	border-radius: 5px;
 }
 
 .resultsContainer {
@@ -70,17 +71,21 @@ button[type='submit'] {
 @media screen and (min-width: 320px) {
 
 	.logo {
-		display: block;
-		margin: 0 auto;
-		width: 100%;
-		margin-top: 50px;
-		border: 10px solid #FE287A;
-		border-radius: 5px;
+		width: 85%;
 	}
+}
 
-	.outer_container {
-		max-width: 85%;
-		margin: 0 auto;
-		text-align: center;
+/*===Mobile view===*/
+@media screen and (min-width: 320px) {
+	
+	.logo {
+		width: 65%;
+	}
+}
+
+/*===Desktop view===*/
+@media screen and (min-width: 1000px) {
+	.logo {
+		width: 50%;
 	}
 }
