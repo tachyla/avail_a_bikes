@@ -8,10 +8,12 @@ Avail-a-Bikes is the application that pinpoints the city’s bike-share location
 
 ScreenShots
 
-Landing Page
-Input Screen
-Google Places AutoComplete
-Bike-Share Results
+<a src="https://gyazo.com/0269b86a7ad639d4cd41151f07c1ebab">Landing Page</a>
+<a src="https://gyazo.com/e5543fc11d544492b88a1ef4cd07d92d">Input Screen</a>
+<a src="https://gyazo.com/95dded3d08e0cf0934f5e76e2dbc2266">Google Places AutoComplete</a>
+<a src="https://gyazo.com/c8103d5a746b1162025d7581887f27c5">Bike-Share Results</a>         
+
+
 
 Tech Stack
 
