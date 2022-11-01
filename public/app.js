@@ -10,10 +10,7 @@ function fetchAllNetworks(cityName, data) {
   $.getJSON(appState.baseUrl, function (data) {
     const usNetworks = data.networks.filter(network => network.location.country === 'US');
     const cityNetwork = usNetworks.filter(network => network.location.city);
-    console.log(cityNetwork);
 
-    console.log('cityNetwork', cityNetwork);
-    //cityNetwork contains only locations in that city
     if (cityNetwork.length > 0) {
       const uri = 'https://api.citybik.es';
       let cityNetworkUrl = uri + cityNetwork[0].href;

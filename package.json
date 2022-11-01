@@ -4,7 +4,7 @@
   "description": "A tool for finding nearby bikes stations.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node app.test.js",
     "start": "node server.js"
   },
   "repository": {
