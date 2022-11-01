@@ -1,0 +1,15 @@
+extends layout 
+
+block layout-content
+    div.hidden_search
+        label.search Search City, State 
+        input(type="text", id="city_needed", placeholder="City, State", required) 
+        
+    main.user_input
+        div.main_container
+        form(action="") 
+            label.numBikes # Bikes Needed 
+            input(type="number", id="bikes_needed", min="0", placeholder="5", required)
+            br
+            button(id="searchbutton") Submit 
+        section.resultsContainer
