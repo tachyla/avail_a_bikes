@@ -9,14 +9,15 @@ const appState = { baseUrl: 'https://api.citybik.es/v2/networks' };
 function fetchAllNetworks(cityName, data) {
   $.getJSON(appState.baseUrl, function (data) {
     const usNetworks = data.networks.filter(network => network.location.country === 'US');
-    const cityNetwork = usNetworks.filter(network => network.location.city.toLowerCase() == cityName.toLowerCase());
+    const cityNetwork = usNetworks.filter(network => network.location.city);
+    console.log(cityNetwork);
 
     console.log('cityNetwork', cityNetwork);
     //cityNetwork contains only locations in that city
     if (cityNetwork.length > 0) {
       const uri = 'https://api.citybik.es';
       let cityNetworkUrl = uri + cityNetwork[0].href;
-      console.log(cityNetworkUrl);
+      console.log('cityNetworkUrl: ' + cityNetworkUrl);
 
       fetchNetwork(cityNetwork[0].id, function (data) {
         displayStations(data.network.stations);
@@ -106,7 +107,7 @@ $(function () {
 
 
     function findUSindex(str){
-      let usIndex = str.lastIndexOf(', Uni');
+      let usIndex = str.lastIndexOf(', ');
       return str.slice(0, usIndex); 
     }
     
