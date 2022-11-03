@@ -1,6 +1,5 @@
 const appState = { baseUrl: 'https://api.citybik.es/v2/networks' };
 
-
 /*
   Fetches networks from CityBike API based on cityName
   @param {String}   cityName
@@ -9,7 +8,7 @@ const appState = { baseUrl: 'https://api.citybik.es/v2/networks' };
 function fetchAllNetworks(cityName, data) {
   $.getJSON(appState.baseUrl, function (data) {
     const usNetworks = data.networks.filter(network => network.location.country === 'US');
-    const cityNetwork = usNetworks.filter(network => network.location.city);
+    const cityNetwork = usNetworks.filter(network => network.location.city == cityName);
 
     if (cityNetwork.length > 0) {
       const uri = 'https://api.citybik.es';

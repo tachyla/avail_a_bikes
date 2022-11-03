@@ -14,9 +14,11 @@ app.get("/", (req, res) => {
 
 app.get("/search", (req, res) => {
   res.render("search");
-})
+});
 
-
+app.get("/allNetwords", (req, res) => {
+  res.render("allNetworks");
+});
 
 app.listen(port, () => console.log(
   `Your app is listening on port ${port}`));
