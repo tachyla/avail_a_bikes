@@ -1,19 +1,20 @@
 const axios = require('axios');
+const networksUrl = 'https://api.citybik.es/v2/networks/';
 
-module.exports = function fetchAllNetworks(cityName) {  
-    
-   function getNetworks() {
+module.exports = function getAllNetworks(cityName) {
 
-        const requestNetworks = axios.get('https://api.citybik.es/v2/networks')
-        .then(resp => handleResponse(resp.data.networks))
-        .catch((error) => console.error(error.resp.body))
+    function filterUsNetworks(data){
+        let usNetworks = data.filter(network => network.location.country == 'US');
+        return usNetworks;
+    } 
 
-        function handleResponse(data) {
-            // console.log(data);
-            let results = data;
-            const filteredUsNetworks = results.filter(network => network.location.country == 'US');
-            console.log(filteredUsNetworks);
-        }
+    function filterCityNetwork(cityName, networks) {
+        let cityNetwork = networks.filter(network => network.location.city == cityName);
+        return cityNetwork;
     }
-    return getNetworks();
-}
+
+    return axios.get(networksUrl)
+    .then((res) => filterUsNetworks(res.data.networks))
+    .catch((err) => console.error(err))
+} 
+
