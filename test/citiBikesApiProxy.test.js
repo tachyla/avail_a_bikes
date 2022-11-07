@@ -5,12 +5,24 @@ jest.mock("axios");
 mockAxios.get.mockImplementation(() => Promise.resolve( {data: {
     "networks": [
         {
+            "location": {
+                "city": "Columbus",
+                "country": "fakeCountry",
+            },
+        },
+        {
+            "location": {
+                "city": "Miami, FL",
+                "country": "US",
+            },
+        },
+        {
             "href": "/v2/networks/cogo",
             "location": {
                 "city": "Columbus, OH",
                 "country": "US",
             },
-        },
+        }
     ]} 
 }));
 
@@ -29,9 +41,6 @@ describe("citi Bikes Api", () => {
         it('returns null if a city does not exist', async () => {
             const result = await fetchAllNetworks("Fakecity");
             expect(result).toBe(null);
-
         });
-
     });
-
 });
