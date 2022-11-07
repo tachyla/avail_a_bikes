@@ -5,12 +5,19 @@ module.exports = function getAllNetworks(cityName) {
 
     function filterUsNetworks(data){
         let usNetworks = data.filter(network => network.location.country == 'US');
-        return usNetworks;
+        for(let i = 0; i < usNetworks.length; i++){
+            let network_cityAndState = usNetworks[i].location.city; //string of each NETWORK'S city
+            let networkCityName = getCityName(network_cityAndState);
+            if(networkCityName === cityName){
+                return usNetworks[i].href;
+            }
+        } 
     } 
 
-    function filterCityNetwork(cityName, networks) {
-        let cityNetwork = networks.filter(network => network.location.city == cityName);
-        return cityNetwork;
+    function getCityName(cityAndState) {
+        let indexOfComma = cityAndState.indexOf(",") //=> number
+        let search_input_city = cityAndState.slice(0, indexOfComma);
+        return search_input_city;
     }
 
     return axios.get(networksUrl)

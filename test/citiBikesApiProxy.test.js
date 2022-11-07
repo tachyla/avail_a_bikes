@@ -1,10 +1,15 @@
-const getAllNetworks = require("../src/citiBikesApiProxy.js");
+const fetchAllNetworks = require("../src/citiBikesApiProxy.js");
 
 describe("citi Bikes Api", () => {
     describe("get networks", () => {
         it('returns the network for a city', async () => {
-            const result = await getAllNetworks("Aspen, CO");
-            expect(result[0].href).toBe("/v2/networks/we-cycle");
+            const result = await fetchAllNetworks("Aspen");
+            expect(result).toBe("/v2/networks/we-cycle");
+        });
+
+        it.only('returns the network for a city', async () => {
+            const result = await fetchAllNetworks("Chicago");
+            expect(result).toBe("/v2/networks/divvy");
         });
 
         it('returns null if a city is not provided', () => {});
