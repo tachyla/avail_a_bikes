@@ -23,7 +23,11 @@ describe("citi Bikes Api", () => {
             expect(result).toBe("/v2/networks/cogo");
         });
 
-        it('returns null if a city is not provided', () => {});
+        it('returns null if a city is not provided', async () => {
+            const result = await fetchAllNetworks(null);
+            expect(result).toBe(null);
+        });
+
         it('returns null if a city does not exist', () => {});
         it('returns null if a city does not have a network', () => {});
     });
