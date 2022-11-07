@@ -7,7 +7,7 @@ describe("citi Bikes Api", () => {
             expect(result).toBe("/v2/networks/we-cycle");
         });
 
-        it.only('returns the network for a city', async () => {
+        it('returns the network for a city', async () => {
             const result = await fetchAllNetworks("Chicago");
             expect(result).toBe("/v2/networks/divvy");
         });
