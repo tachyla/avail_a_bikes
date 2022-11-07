@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "avail_a_bikes",
   "version": "1.0.0",
   "description": "A tool for finding nearby bikes stations.",
