@@ -1,4 +1,4 @@
-const fetchAllNetworks = require("../src/citiBikesApiProxy.js");
+const getNetworkHrefByCity = require("../src/citiBikesApiProxy.js");
 const mockAxios = require("axios");
 
 jest.mock("axios");
@@ -29,17 +29,17 @@ mockAxios.get.mockImplementation(() => Promise.resolve( {data: {
 describe("citi Bikes Api", () => {
     describe("get networks", () => {
         it('returns the network for a city', async () => {
-            const result = await fetchAllNetworks("Columbus");
+            const result = await getNetworkHrefByCity("Columbus");
             expect(result).toBe("/v2/networks/cogo");
         });
 
         it('returns null if a city is not provided', async () => {
-            const result = await fetchAllNetworks(null);
+            const result = await getNetworkHrefByCity(null);
             expect(result).toBe(null);
         });
 
         it('returns null if a city does not exist', async () => {
-            const result = await fetchAllNetworks("Fakecity");
+            const result = await getNetworkHrefByCity("Fakecity");
             expect(result).toBe(null);
         });
     });

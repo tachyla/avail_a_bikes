@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const networksUrl = 'https://api.citybik.es/v2/networks/';
 
-module.exports = function getAllNetworks(cityName) {
+module.exports = function getNetworkHrefByCity(cityName) {
 
     function filterUsNetworks(networks){
         for(let i = 0; i < networks.length; i++){
