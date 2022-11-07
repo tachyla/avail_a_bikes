@@ -1,4 +1,6 @@
 const axios = require('axios');
+
+// console.log(axios);
 const networksUrl = 'https://api.citybik.es/v2/networks/';
 
 module.exports = function getAllNetworks(cityName) {
@@ -6,12 +8,13 @@ module.exports = function getAllNetworks(cityName) {
     function filterUsNetworks(data){
         let usNetworks = data.filter(network => network.location.country == 'US');
         for(let i = 0; i < usNetworks.length; i++){
-            let network_cityAndState = usNetworks[i].location.city; //string of each NETWORK'S city
+            let network_cityAndState = usNetworks[i].location.city; //string of each NETWORK'S city Aspen, Co
             let networkCityName = getCityName(network_cityAndState);
             if(networkCityName === cityName){
                 return usNetworks[i].href;
             }
         } 
+        return null;
     } 
 
     function getCityName(cityAndState) {
