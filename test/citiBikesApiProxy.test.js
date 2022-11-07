@@ -31,7 +31,7 @@ describe("citi Bikes Api", () => {
             expect(result).toBe(null);
 
         });
-        it('returns null if a city does not have a network', () => {});
+
     });
 
 });
