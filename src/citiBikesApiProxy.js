@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const networksUrl = 'https://api.citybik.es/v2/networks/';
+const base_url = "https://api.citybik.es";
 
 function getNetworkHrefByCity(cityName) {
 
@@ -20,14 +20,29 @@ function getNetworkHrefByCity(cityName) {
         let search_input_city = cityAndState.slice(0, indexOfComma);
         return search_input_city;
     }
-
-    return axios.get(networksUrl)
+    const url = new URL("/v2/networks", base_url);
+    return axios.get(url)
     .then((res) => filterUsNetworks(res.data.networks))
-    .catch((err) => console.error(err))
+    .catch((err) => console.error(err));
 } 
 
-function getNetworkStationsByHref(networkHref){
-    return null;
+function getNetworkStationsByHref(networkHref, numberOfBikes){
+    if(!networkHref) return null;
+    
+    const url = new URL(networkHref, base_url); 
+
+    return axios.get(url)
+    .then((res) => getAvailableBikes(res.data.stations, numberOfBikes))
+    .catch((err) => console.error(err));   
+
+    function getAvailableBikes(stations, numberOfBikes) {
+        for(let i = 0; i < stations.length; i++){
+            if(stations[i].free_bikes >= numberOfBikes){
+                return stations[i].name;
+            }
+        }
+        return null;
+    }
 }
 
 module.exports = { getNetworkHrefByCity, getNetworkStationsByHref };
